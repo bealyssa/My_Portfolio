@@ -1,0 +1,33 @@
+# Dependencies
+node_modules/
+
+# Production build output
+/dist
+
+# Local env files (never commit secrets)
+.env
+.env.*
+!.env.example
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Editor / OS
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+.vscode/
+!.vscode/extensions.json
+!.vscode/settings.json
+!.vscode/launch.json
+!.vscode/tasks.json
+
+# Vite cache
+.vite/
+
+# Optional: coverage
+coverage/
