@@ -14,7 +14,7 @@ const CraftSection = () => {
                     <div className="max-w-[645px]">
                         <p className="text-2xl sm:text-3xl lg:text-4xl lg:md:text-[28px] font-medium tracking-tight"
                             style={{ color: '#1f1f1f' }}>
-Precision-led design, rigorously engineered systems, and meticulous execution combine to create calm, high-performing digital experiences that feel effortless.                        </p>
+                            Precision-led design, rigorously engineered systems, and meticulous execution combine to create calm, high-performing digital experiences that feel effortless.                        </p>
                     </div>
                 </div>
 

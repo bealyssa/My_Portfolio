@@ -12,7 +12,7 @@ const Header = ({ isIntroFinished = false }) => {
     };
 
     return (
-        <header 
+        <header
             className="absolute top-0 left-0 right-0 z-50 bg-transparent transition-opacity duration-500"
             style={{ opacity: isIntroFinished ? 1 : 0, pointerEvents: isIntroFinished ? 'auto' : 'none' }}
         >

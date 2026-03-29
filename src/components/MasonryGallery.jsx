@@ -184,7 +184,7 @@ const MasonryGallery = () => {
         const containerWidth = containerRef.current.offsetWidth;
         let columns;
         let gap = GAP;
-        
+
         if (containerWidth >= 1024) {
             columns = 5;
         } else if (containerWidth >= 768) {
@@ -205,10 +205,10 @@ const MasonryGallery = () => {
         recalcLayout();
         const ro = new ResizeObserver(() => recalcLayout());
         if (containerRef.current) ro.observe(containerRef.current);
-        
+
         const handleResize = () => recalcLayout();
         window.addEventListener('resize', handleResize);
-        
+
         return () => {
             ro.disconnect();
             window.removeEventListener('resize', handleResize);

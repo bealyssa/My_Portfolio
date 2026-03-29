@@ -622,13 +622,13 @@ const FeaturedWorks = () => {
                         top: '0',
                         right: '0',
                         bottom: '0',
-                        width: isMobile ? '100%' : '100%',
-                        maxWidth: isMobile ? 'none' : '600px',
+                        width: isMobile || isTablet ? '100%' : '100%',
+                        maxWidth: isMobile || isTablet ? 'none' : '600px',
                         backgroundColor: '#ffffff',
                         zIndex: 9999,
                         transform: 'translateX(0)',
                         overflowY: 'auto',
-                        boxShadow: isMobile ? '-10px 0 30px rgba(0, 0, 0, 0.15)' : '-10px 0 50px rgba(0, 0, 0, 0.2)'
+                        boxShadow: isMobile || isTablet ? '-10px 0 30px rgba(0, 0, 0, 0.15)' : '-10px 0 50px rgba(0, 0, 0, 0.2)'
                     }}
                 >
                     <button
@@ -665,13 +665,14 @@ const FeaturedWorks = () => {
                         </svg>
                     </button>
 
-                    <div style={{ padding: isMobile ? '60px 20px 40px' : '80px 40px 40px' }}>
+                    <div style={{ padding: isMobile || isTablet ? '60px 20px 60px' : '80px 40px 40px', display: 'flex', flexDirection: 'column' }}>
                         <div style={{
                             width: '100%',
-                            height: isMobile ? '220px' : '300px',
+                            height: isMobile || isTablet ? '220px' : '300px',
                             borderRadius: '16px',
                             overflow: 'hidden',
-                            marginBottom: '24px'
+                            marginBottom: '24px',
+                            flexShrink: 0
                         }} className="fw-modal-item">
                             <img
                                 src={selectedProject.image}
@@ -703,7 +704,7 @@ const FeaturedWorks = () => {
                         </div>
 
                         <h2 className="fw-modal-item" style={{
-                            fontSize: isMobile ? '28px' : '36px',
+                            fontSize: isMobile ? '28px' : isTablet ? '32px' : '36px',
                             fontWeight: 600,
                             color: 'rgb(17, 17, 17)',
                             marginBottom: '8px',
@@ -713,7 +714,7 @@ const FeaturedWorks = () => {
                         </h2>
 
                         <h3 className="fw-modal-item" style={{
-                            fontSize: isMobile ? '14px' : '18px',
+                            fontSize: isMobile ? '14px' : isTablet ? '16px' : '18px',
                             fontWeight: 500,
                             color: 'rgb(107, 114, 128)',
                             marginBottom: '20px'
@@ -722,7 +723,7 @@ const FeaturedWorks = () => {
                         </h3>
 
                         <p className="fw-modal-item" style={{
-                            fontSize: isMobile ? '14px' : '16px',
+                            fontSize: isMobile ? '14px' : isTablet ? '15px' : '16px',
                             lineHeight: 1.6,
                             color: 'rgb(31, 31, 31)',
                             marginBottom: '24px'
@@ -800,13 +801,13 @@ const FeaturedWorks = () => {
                                 type="button"
                                 onClick={toggleMoreGallery}
                                 style={{
-                                    padding: isMobile ? '10px 14px' : '12px 18px',
+                                    padding: isMobile ? '10px 14px' : isTablet ? '11px 16px' : '12px 18px',
                                     borderRadius: '999px',
                                     border: '1px solid #111111',
                                     background: showMoreGallery ? '#111111' : '#ffffff',
                                     color: showMoreGallery ? '#ffffff' : '#111111',
                                     fontWeight: 600,
-                                    fontSize: isMobile ? '13px' : '14px',
+                                    fontSize: isMobile ? '13px' : isTablet ? '13px' : '14px',
                                     cursor: 'pointer',
                                     transition: 'all 0.25s ease'
                                 }}
@@ -852,22 +853,69 @@ const FeaturedWorks = () => {
                                 Preview
                             </button>
                         </div>
+
+                        {/* Mobile & Tablet Gallery - Inside Modal */}
+                        {(isMobile || isTablet) && showMoreGallery && (
+                            <div style={{ marginTop: '40px', paddingBottom: '40px', flexShrink: 0 }}>
+                                <div style={{ marginBottom: '16px', padding: '0 4px' }}>
+                                    <p style={{ margin: 0, fontSize: '12px', letterSpacing: '0.08em', textTransform: 'uppercase', color: '#6b7280' }}>
+                                        Project Gallery
+                                    </p>
+                                </div>
+                                <div
+                                    style={{
+                                        display: 'grid',
+                                        gridTemplateColumns: 'repeat(auto-fit, minmax(100px, 1fr))',
+                                        gap: '12px'
+                                    }}
+                                >
+                                    {getCurrentGalleryImages().map((image, index) => (
+                                        <div
+                                            key={`gallery-mobile-${index}`}
+                                            style={{
+                                                width: '100%',
+                                                aspectRatio: '16 / 10',
+                                                borderRadius: '14px',
+                                                overflow: 'hidden',
+                                                background: '#f3f4f6',
+                                                border: '1px solid rgba(255,255,255,0.35)',
+                                                boxShadow: '0 12px 30px rgba(0,0,0,0.22)'
+                                            }}
+                                        >
+                                            <img
+                                                src={image}
+                                                alt={`Gallery ${index + 1}`}
+                                                style={{
+                                                    width: '100%',
+                                                    height: '100%',
+                                                    objectFit: shouldUseContainInPanels(selectedProject.id)
+                                                        ? (selectedProject.galleryImageFit || 'contain')
+                                                        : 'cover',
+                                                    objectPosition: selectedProject.imagePosition || 'center',
+                                                    backgroundColor: shouldUseContainInPanels(selectedProject.id)
+                                                        ? (selectedProject.imageBg || '#f3f4f6')
+                                                        : 'transparent'
+                                                }}
+                                            />
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
                     </div>
                 </div>
             )}
 
-            {selectedProject && (
+            {selectedProject && !isMobile && !isTablet && (
                 <div
                     ref={morePanelRef}
                     style={{
                         position: 'fixed',
-                        top: isMobile ? 'auto' : '50%',
-                        left: isMobile ? '20px' : 'calc((100vw - min(100vw, 600px) - min(42vw, 480px)) / 2)',
-                        bottom: isMobile ? '20px' : 'auto',
-                        right: isMobile ? '20px' : 'auto',
-                        transform: isMobile ? 'none' : 'translateY(-50%)',
-                        width: isMobile ? 'calc(100% - 40px)' : 'min(50vw, 640px)',
-                        maxHeight: isMobile ? '60vh' : '78vh',
+                        top: '50%',
+                        left: 'calc((100vw - 600px - min(50vw, 640px)) / 2)',
+                        transform: 'translateY(-50%)',
+                        width: 'min(50vw, 640px)',
+                        maxHeight: '78vh',
                         overflowY: 'auto',
                         background: 'transparent',
                         border: 'none',
@@ -875,7 +923,7 @@ const FeaturedWorks = () => {
                         boxShadow: 'none',
                         padding: 0,
                         zIndex: 9999,
-                        display: 'none'
+                        display: showMoreGallery ? 'block' : 'none'
                     }}
                 >
                     <div style={{ marginBottom: '12px', padding: '0 4px' }}>
