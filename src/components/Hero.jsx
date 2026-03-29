@@ -461,9 +461,10 @@ const Hero = ({ cvLink = '/cv.pdf' }) => {
                         aria-labelledby="contact-modal-title"
                         onClick={(event) => event.stopPropagation()}
                         style={{
-                            width: 'min(1040px, 100%)',
-                            borderRadius: '20px',
-                            overflow: 'hidden',
+                            width: 'min(95vw, 1040px)',
+                            maxHeight: '90vh',
+                            borderRadius: '16px',
+                            overflow: 'auto',
                             border: '1px solid rgba(255, 255, 255, 0.16)',
                             background: 'radial-gradient(circle at 12% 10%, rgba(115,51,242,0.25) 0%, rgba(11,12,17,0.9) 30%, rgba(10,10,14,0.98) 100%)',
                             boxShadow: '0 30px 110px rgba(0, 0, 0, 0.5)',
@@ -476,11 +477,11 @@ const Hero = ({ cvLink = '/cv.pdf' }) => {
                                 display: 'flex',
                                 alignItems: 'center',
                                 justifyContent: 'space-between',
-                                padding: '18px 22px',
+                                padding: 'clamp(12px, 3vw, 18px) clamp(14px, 3vw, 22px)',
                                 borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
                             }}
                         >
-                            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', minWidth: 0 }}>
                                 <span
                                     style={{
                                         width: '10px',
@@ -488,9 +489,10 @@ const Hero = ({ cvLink = '/cv.pdf' }) => {
                                         borderRadius: '999px',
                                         background: '#22c55e',
                                         boxShadow: '0 0 0 4px rgba(34,197,94,0.2)',
+                                        flexShrink: 0,
                                     }}
                                 />
-                                <h2 id="contact-modal-title" style={{ fontSize: '28px', fontWeight: 600, letterSpacing: '-0.02em' }}>
+                                <h2 id="contact-modal-title" style={{ fontSize: 'clamp(20px, 5vw, 28px)', fontWeight: 600, letterSpacing: '-0.02em', margin: 0 }}>
                                     Let&apos;s Talk
                                 </h2>
                             </div>
@@ -499,14 +501,15 @@ const Hero = ({ cvLink = '/cv.pdf' }) => {
                                 onClick={closeContactModal}
                                 aria-label="Close contact form"
                                 style={{
-                                    width: '42px',
-                                    height: '42px',
+                                    width: 'clamp(36px, 8vw, 42px)',
+                                    height: 'clamp(36px, 8vw, 42px)',
                                     borderRadius: '999px',
                                     border: '1px solid rgba(255,255,255,0.16)',
                                     color: '#f5f7fa',
                                     background: 'rgba(255,255,255,0.06)',
                                     cursor: 'pointer',
-                                    fontSize: '18px',
+                                    fontSize: 'clamp(14px, 3vw, 18px)',
+                                    flexShrink: 0,
                                 }}
                             >
                                 ✕
@@ -519,25 +522,25 @@ const Hero = ({ cvLink = '/cv.pdf' }) => {
                             <aside
                                 className="contact-modal-item"
                                 style={{
-                                    padding: '26px 24px 28px',
+                                    padding: 'clamp(16px, 3vw, 26px)',
                                     borderRight: '1px solid rgba(255,255,255,0.08)',
                                     borderBottom: '1px solid rgba(255,255,255,0.08)',
                                     background: 'linear-gradient(180deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.01) 100%)',
                                 }}
                             >
-                                <p style={{ fontSize: '13px', textTransform: 'uppercase', letterSpacing: '0.18em', color: 'rgba(237, 241, 248, 0.65)', marginBottom: '16px' }}>
+                                <p style={{ fontSize: 'clamp(10px, 1.3vw, 13px)', textTransform: 'uppercase', letterSpacing: '0.18em', color: 'rgba(237, 241, 248, 0.65)', marginBottom: 'clamp(12px, 2vw, 16px)' }}>
                                     Project Inquiry
                                 </p>
-                                <h3 style={{ fontSize: '40px', lineHeight: 1, letterSpacing: '-0.03em', fontWeight: 650, marginBottom: '14px' }}>
+                                <h3 style={{ fontSize: 'clamp(28px, 5vw, 40px)', lineHeight: 1, letterSpacing: '-0.03em', fontWeight: 650, marginBottom: 'clamp(10px, 2vw, 14px)' }}>
                                     Build something
                                     <br />
                                     remarkable.
                                 </h3>
-                                <p style={{ color: 'rgba(240,243,248,0.8)', lineHeight: 1.7, marginBottom: '20px' }}>
+                                <p style={{ color: 'rgba(240,243,248,0.8)', lineHeight: 1.7, marginBottom: 'clamp(14px, 2vw, 20px)', fontSize: 'clamp(12px, 1.8vw, 15px)' }}>
                                     Share your idea, timeline, and goals. The message will open in your email app prefilled and ready to send.
                                 </p>
 
-                                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginBottom: '24px' }}>
+                                <div style={{ display: 'flex', flexWrap: 'wrap', gap: 'clamp(6px, 1.5vw, 8px)', marginBottom: 'clamp(16px, 2.5vw, 24px)' }}>
                                     {['Web Apps', 'UI/UX', 'Full-Stack', 'Deployment'].map((chip) => (
                                         <span
                                             key={chip}
@@ -545,8 +548,8 @@ const Hero = ({ cvLink = '/cv.pdf' }) => {
                                                 borderRadius: '999px',
                                                 border: '1px solid rgba(255,255,255,0.2)',
                                                 background: 'rgba(255,255,255,0.06)',
-                                                padding: '8px 12px',
-                                                fontSize: '12px',
+                                                padding: 'clamp(6px, 1vw, 8px) clamp(8px, 1.5vw, 12px)',
+                                                fontSize: 'clamp(10px, 1.5vw, 12px)',
                                                 letterSpacing: '0.03em',
                                             }}
                                         >
@@ -555,7 +558,7 @@ const Hero = ({ cvLink = '/cv.pdf' }) => {
                                     ))}
                                 </div>
 
-                                <div style={{ display: 'grid', gap: '12px' }}>
+                                <div style={{ display: 'grid', gap: 'clamp(8px, 1.5vw, 12px)' }}>
                                     <a
                                         href={`mailto:${targetEmail}`}
                                         style={{
@@ -564,13 +567,13 @@ const Hero = ({ cvLink = '/cv.pdf' }) => {
                                             border: '1px solid rgba(255,255,255,0.16)',
                                             background: 'rgba(255,255,255,0.04)',
                                             borderRadius: '12px',
-                                            padding: '11px 12px',
-                                            fontSize: '15px',
+                                            padding: 'clamp(9px, 1.5vw, 11px) clamp(10px, 1.5vw, 12px)',
+                                            fontSize: 'clamp(12px, 1.8vw, 15px)',
                                         }}
                                     >
                                         {targetEmail}
                                     </a>
-                                    <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
+                                    <div style={{ display: 'flex', gap: 'clamp(8px, 1.5vw, 10px)', flexWrap: 'wrap' }}>
                                         <a
                                             href="https://www.linkedin.com/in/bea-alyssa-lugtu"
                                             target="_blank"
@@ -581,8 +584,8 @@ const Hero = ({ cvLink = '/cv.pdf' }) => {
                                                 border: '1px solid rgba(255,255,255,0.16)',
                                                 background: 'rgba(255,255,255,0.04)',
                                                 borderRadius: '12px',
-                                                padding: '10px 12px',
-                                                fontSize: '14px',
+                                                padding: 'clamp(8px, 1.2vw, 10px) clamp(10px, 1.5vw, 12px)',
+                                                fontSize: 'clamp(11px, 1.6vw, 14px)',
                                             }}
                                         >
                                             LinkedIn
@@ -597,8 +600,8 @@ const Hero = ({ cvLink = '/cv.pdf' }) => {
                                                 border: '1px solid rgba(255,255,255,0.16)',
                                                 background: 'rgba(255,255,255,0.04)',
                                                 borderRadius: '12px',
-                                                padding: '10px 12px',
-                                                fontSize: '14px',
+                                                padding: 'clamp(8px, 1.2vw, 10px) clamp(10px, 1.5vw, 12px)',
+                                                fontSize: 'clamp(11px, 1.6vw, 14px)',
                                             }}
                                         >
                                             GitHub
@@ -610,12 +613,12 @@ const Hero = ({ cvLink = '/cv.pdf' }) => {
                             <form
                                 onSubmit={handleContactSubmit}
                                 style={{
-                                    padding: '26px 24px 28px',
+                                    padding: 'clamp(16px, 3vw, 26px)',
                                     display: 'grid',
-                                    gap: '12px',
+                                    gap: 'clamp(10px, 1.5vw, 12px)',
                                 }}
                             >
-                                <div className="contact-modal-item" style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '12px' }}>
+                                <div className="contact-modal-item" style={{ display: 'grid', gridTemplateColumns: '1fr', gap: 'clamp(10px, 1.5vw, 12px)' }}>
                                     <input
                                         type="text"
                                         name="name"
@@ -625,12 +628,12 @@ const Hero = ({ cvLink = '/cv.pdf' }) => {
                                         required
                                         style={{
                                             width: '100%',
-                                            borderRadius: '12px',
+                                            borderRadius: 'clamp(10px, 1.5vw, 12px)',
                                             border: '1px solid rgba(255,255,255,0.2)',
                                             background: 'rgba(255,255,255,0.03)',
                                             color: '#f8fafc',
-                                            padding: '12px 14px',
-                                            fontSize: '15px',
+                                            padding: 'clamp(8px, 1.5vw, 12px) clamp(10px, 1.5vw, 14px)',
+                                            fontSize: 'clamp(13px, 2vw, 15px)',
                                             outline: 'none',
                                         }}
                                     />
@@ -643,12 +646,12 @@ const Hero = ({ cvLink = '/cv.pdf' }) => {
                                         required
                                         style={{
                                             width: '100%',
-                                            borderRadius: '12px',
+                                            borderRadius: 'clamp(10px, 1.5vw, 12px)',
                                             border: '1px solid rgba(255,255,255,0.2)',
                                             background: 'rgba(255,255,255,0.03)',
                                             color: '#f8fafc',
-                                            padding: '12px 14px',
-                                            fontSize: '15px',
+                                            padding: 'clamp(8px, 1.5vw, 12px) clamp(10px, 1.5vw, 14px)',
+                                            fontSize: 'clamp(13px, 2vw, 15px)',
                                             outline: 'none',
                                         }}
                                     />
@@ -663,12 +666,12 @@ const Hero = ({ cvLink = '/cv.pdf' }) => {
                                     placeholder="Subject"
                                     style={{
                                         width: '100%',
-                                        borderRadius: '12px',
+                                        borderRadius: 'clamp(10px, 1.5vw, 12px)',
                                         border: '1px solid rgba(255,255,255,0.2)',
                                         background: 'rgba(255,255,255,0.03)',
                                         color: '#f8fafc',
-                                        padding: '12px 14px',
-                                        fontSize: '15px',
+                                        padding: 'clamp(8px, 1.5vw, 12px) clamp(10px, 1.5vw, 14px)',
+                                        fontSize: 'clamp(13px, 2vw, 15px)',
                                         outline: 'none',
                                     }}
                                 />
@@ -684,28 +687,29 @@ const Hero = ({ cvLink = '/cv.pdf' }) => {
                                     style={{
                                         width: '100%',
                                         resize: 'vertical',
-                                        minHeight: '170px',
-                                        borderRadius: '12px',
+                                        minHeight: 'clamp(120px, 30vh, 170px)',
+                                        borderRadius: 'clamp(10px, 1.5vw, 12px)',
                                         border: '1px solid rgba(255,255,255,0.2)',
                                         background: 'rgba(255,255,255,0.03)',
                                         color: '#f8fafc',
-                                        padding: '12px 14px',
-                                        fontSize: '15px',
+                                        padding: 'clamp(8px, 1.5vw, 12px) clamp(10px, 1.5vw, 14px)',
+                                        fontSize: 'clamp(13px, 2vw, 15px)',
                                         outline: 'none',
                                     }}
                                 />
 
-                                <div className="contact-modal-item" style={{ display: 'flex', alignItems: 'center', gap: '12px', marginTop: '8px' }}>
+                                <div className="contact-modal-item" style={{ display: 'flex', alignItems: 'center', gap: 'clamp(8px, 2vw, 12px)', marginTop: 'clamp(4px, 1vw, 8px)', flexWrap: 'wrap' }}>
                                     <button
                                         type="submit"
                                         disabled={isSendingMessage}
                                         style={{
-                                            flex: 1,
+                                            flex: '1 1 auto',
+                                            minWidth: 'clamp(100px, 20vw, 140px)',
                                             borderRadius: '14px',
                                             border: 'none',
                                             cursor: 'pointer',
-                                            padding: '13px 16px',
-                                            fontSize: '16px',
+                                            padding: 'clamp(10px, 1.5vw, 13px) clamp(12px, 2vw, 16px)',
+                                            fontSize: 'clamp(13px, 2vw, 16px)',
                                             fontWeight: 600,
                                             color: '#fff',
                                             background: isSendingMessage
@@ -721,11 +725,13 @@ const Hero = ({ cvLink = '/cv.pdf' }) => {
                                         type="button"
                                         onClick={closeContactModal}
                                         style={{
+                                            flex: '1 1 auto',
+                                            minWidth: 'clamp(100px, 20vw, 140px)',
                                             borderRadius: '14px',
                                             border: '1px solid rgba(255,255,255,0.18)',
                                             cursor: 'pointer',
-                                            padding: '13px 16px',
-                                            fontSize: '15px',
+                                            padding: 'clamp(10px, 1.5vw, 13px) clamp(12px, 2vw, 16px)',
+                                            fontSize: 'clamp(13px, 2vw, 15px)',
                                             fontWeight: 500,
                                             color: '#f8fafc',
                                             background: 'rgba(255,255,255,0.05)',
@@ -739,9 +745,9 @@ const Hero = ({ cvLink = '/cv.pdf' }) => {
                                     <p
                                         className="contact-modal-item"
                                         style={{
-                                            marginTop: '4px',
+                                            marginTop: 'clamp(2px, 0.5vw, 4px)',
                                             color: contactStatus.type === 'success' ? '#86efac' : '#fda4af',
-                                            fontSize: '13px',
+                                            fontSize: 'clamp(11px, 1.8vw, 13px)',
                                             lineHeight: 1.45,
                                         }}
                                     >
@@ -752,7 +758,7 @@ const Hero = ({ cvLink = '/cv.pdf' }) => {
                                 <p
                                     style={{
                                         color: 'rgba(240,243,248,0.65)',
-                                        fontSize: '12px',
+                                        fontSize: 'clamp(10px, 1.5vw, 12px)',
                                         lineHeight: 1.5,
                                     }}
                                 >
