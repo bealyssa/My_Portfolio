@@ -183,13 +183,21 @@ const MasonryGallery = () => {
         if (!containerRef.current) return;
         const containerWidth = containerRef.current.offsetWidth;
         let columns;
-        if (containerWidth >= 1024) columns = 5;
-        else if (containerWidth >= 768) columns = 4;
-        else if (containerWidth >= 480) columns = 3;
-        else columns = 2;
+        let gap = GAP;
+        
+        if (containerWidth >= 1024) {
+            columns = 5;
+        } else if (containerWidth >= 768) {
+            columns = 4;
+        } else if (containerWidth >= 640) {
+            columns = 3;
+        } else {
+            columns = 2;
+            gap = 8;
+        }
 
-        const colWidth = (containerWidth - GAP * (columns - 1)) / columns;
-        const result = computeMasonry(tiles, columns, GAP, colWidth);
+        const colWidth = (containerWidth - gap * (columns - 1)) / columns;
+        const result = computeMasonry(tiles, columns, gap, colWidth);
         setLayout(result);
     }, []);
 
@@ -197,7 +205,14 @@ const MasonryGallery = () => {
         recalcLayout();
         const ro = new ResizeObserver(() => recalcLayout());
         if (containerRef.current) ro.observe(containerRef.current);
-        return () => ro.disconnect();
+        
+        const handleResize = () => recalcLayout();
+        window.addEventListener('resize', handleResize);
+        
+        return () => {
+            ro.disconnect();
+            window.removeEventListener('resize', handleResize);
+        };
     }, [recalcLayout]);
 
     // Scroll-triggered fade-in for tiles
@@ -231,13 +246,13 @@ const MasonryGallery = () => {
     return (
         <section
             ref={sectionRef}
-            className="py-24 px-4 md:px-8"
+            className="py-12 sm:py-16 lg:py-24 px-4 sm:px-6 lg:px-8"
             style={{ backgroundColor: '#0a0a0a' }}
         >
             <div className="max-w-[1400px] mx-auto">
                 {/* Section heading */}
-                <div className="mb-16 flex justify-between items-end">
-                    <h2 className="text-5xl md:text-6xl font-normal text-white tracking-tight leading-[1.1]">
+                <div className="mb-10 sm:mb-14 lg:mb-16 flex justify-between items-end">
+                    <h2 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-normal text-white tracking-tight leading-[1.1]">
                         Gallery
                     </h2>
                 </div>

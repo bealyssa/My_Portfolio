@@ -334,7 +334,7 @@ function App() {
     <>
       {showIntro && <IntroLoader onComplete={() => setIsIntroFinished(true)} />}
 
-      <Header />
+      <Header isIntroFinished={isIntroFinished} />
       <StaggeredMenu
         position="right"
         items={staggeredMenuItems}

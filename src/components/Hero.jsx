@@ -281,54 +281,43 @@ const Hero = ({ cvLink = '/cv.pdf' }) => {
     }, [isContactModalOpen]);
 
     return (
-        <section className="relative h-screen overflow-hidden" id="hero-section">
-            {/* Hero Content Wrapper */}
-            <div ref={heroContentRef} className="sticky top-0 h-screen">
-                {/* Centered Portrait Image */}
-                <div className="absolute inset-0 flex justify-center items-end">
-                    <div className="relative h-[88%] w-auto">
+        <section className="relative overflow-hidden" id="hero-section">
+            {/* Mobile/Tablet Layout */}
+            <div className="lg:hidden flex flex-col w-full h-auto pt-20" ref={heroContentRef}>
+                {/* Mobile Image Container */}
+                <div className="flex justify-center items-start pt-8 px-4">
+                    <div className="relative w-full max-w-sm h-auto">
                         <img
                             ref={personImageRef}
                             src={personFace}
                             alt="Bea Lugtu"
-                            className="h-full w-auto object-cover object-bottom"
+                            className="w-full h-auto object-cover object-bottom rounded-lg"
                         />
-                        {/* White fade at bottom - glassmorphism effect */}
-                        <div
-                            className="absolute bottom-0 left-[-50%] right-[-50%] h-[35%] pointer-events-none"
-                            style={{
-                                backdropFilter: 'blur(4px)',
-                                WebkitBackdropFilter: 'blur(4px)',
-                                background: 'linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,0.1) 15%, rgba(255,255,255,0.3) 30%, rgba(255,255,255,0.5) 45%, rgba(255,255,255,0.7) 60%, rgba(255,255,255,0.85) 75%, rgba(255,255,255,0.95) 88%, rgba(255,255,255,1) 100%)',
-                                maskImage: 'linear-gradient(to bottom, transparent 0%, black 15%, black 100%)',
-                                WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 15%, black 100%)',
-                            }}
-                        ></div>
                     </div>
                 </div>
 
-                {/* Left Bottom - Badge + Headline */}
-                <div className="absolute bottom-24 lg:bottom-22 left-12 lg:left-52 z-10 max-w-[480px]">
-                    <div className="flex items-center gap-2 mb-3">
-                        <div className="w-[7px] h-[7px] bg-green-500 rounded-full"></div>
-                        <span className="text-[16px]" style={{ color: 'rgb(108, 113, 121)' }}>Available for new projects</span>
+                {/* Mobile Badge + Headline */}
+                <div className="px-4 pt-6 pb-4">
+                    <div className="flex items-center gap-2 mb-2">
+                        <div className="w-[7px] h-[7px] bg-green-500 rounded-full flex-shrink-0"></div>
+                        <span className="text-[12px]" style={{ color: 'rgb(108, 113, 121)' }}>Available for new projects</span>
                     </div>
-                    <h1 className="text-[1.8rem] lg:text-[40px] font-medium leading-[1.08] tracking-[-0.01em]" style={{ color: 'rgb(17, 17, 17)' }}>
+                    <h1 ref={headlineRef} className="text-2xl font-medium leading-[1.08] tracking-[-0.01em]" style={{ color: 'rgb(17, 17, 17)' }}>
                         Full-Stack Developer building web apps that don't just look good they run smooth                    </h1>
                 </div>
 
-                {/* Right Side - Description + Button */}
-                <div className="absolute right-[10%] lg:right-[11%] bottom-[20%] z-10 max-w-[430px]">
-                    <p ref={descriptionRef} className="text-[16px] leading-[1.4] mb-5 font-light" style={{ color: 'rgb(31, 31, 31)' }}>
+                {/* Mobile Description + Buttons */}
+                <div className="px-4 pb-8">
+                    <p ref={descriptionRef} className="text-sm leading-[1.4] mb-4 font-light" style={{ color: 'rgb(31, 31, 31)' }}>
                         I build applications that sit between logic and experience, turning ideas into functional systems. Focused on creating things that not only work but also feel right, with clarity, structure, and real-world usability in mind.                    </p>
-                    <div ref={buttonRef} className="flex items-center gap-3">
+                    <div ref={buttonRef} className="flex flex-col items-stretch gap-3">
                         <a
                             href="#"
                             onClick={(event) => {
                                 event.preventDefault();
                                 openContactModal();
                             }}
-                            className="text-white px-6 py-3 rounded-2xl text-[15px] font-medium transition-colors duration-300 hover:bg-[#7333F2]"
+                            className="text-center text-white px-4 py-2 rounded-2xl text-sm font-medium transition-colors duration-300 hover:bg-[#7333F2]"
                             style={{
                                 backgroundColor: 'rgb(17, 17, 17)',
                                 boxShadow: '0.47422285992186514px 0.47422285992186514px 0.6706524000888582px -0.2px rgba(0, 0, 0, 0.05), 1.2914347811369224px 1.2914347811369224px 1.8263645824041657px -0.4px rgba(0, 0, 0, 0.06), 2.8355233674636113px 2.8355233674636113px 4.010035602692868px -0.6px rgba(0, 0, 0, 0.08), 6.294214453822934px 6.294214453822934px 8.901363445081158px -0.8px rgba(0, 0, 0, 0.11), 16px 16px 22.627416997969522px -1px rgba(0, 0, 0, 0.2)',
@@ -337,11 +326,13 @@ const Hero = ({ cvLink = '/cv.pdf' }) => {
                         >
                             Let's talk
                         </a>
+
+                        {/* Get CV Button - Mobile Version */}
                         <a
                             href={cvLink}
                             target="_blank"
                             rel="noreferrer"
-                            className="px-6 py-3 rounded-2xl text-[15px] font-medium transition-colors duration-300"
+                            className="text-center px-4 py-2 rounded-2xl text-sm font-medium transition-colors duration-300"
                             style={{
                                 backgroundColor: '#ffffff',
                                 color: 'rgb(17, 17, 17)',
@@ -359,6 +350,89 @@ const Hero = ({ cvLink = '/cv.pdf' }) => {
                         >
                             Get CV
                         </a>
+                    </div>
+                </div>
+            </div>
+
+            {/* Desktop Layout - Sticky with absolute positioned overlays */}
+            <div className="hidden lg:block sticky top-0 h-screen overflow-hidden">
+                <div ref={heroContentRef} className="relative h-full">
+                    {/* Centered Portrait Image */}
+                    <div className="absolute inset-0 flex justify-center items-end">
+                        <div className="relative h-[88%] w-auto">
+                            <img
+                                ref={personImageRef}
+                                src={personFace}
+                                alt="Bea Lugtu"
+                                className="h-full w-auto object-cover object-bottom"
+                            />
+                            {/* White fade at bottom - glassmorphism effect */}
+                            <div
+                                className="absolute bottom-0 left-[-50%] right-[-50%] h-[35%] pointer-events-none"
+                                style={{
+                                    backdropFilter: 'blur(4px)',
+                                    WebkitBackdropFilter: 'blur(4px)',
+                                    background: 'linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,0.1) 15%, rgba(255,255,255,0.3) 30%, rgba(255,255,255,0.5) 45%, rgba(255,255,255,0.7) 60%, rgba(255,255,255,0.85) 75%, rgba(255,255,255,0.95) 88%, rgba(255,255,255,1) 100%)',
+                                    maskImage: 'linear-gradient(to bottom, transparent 0%, black 15%, black 100%)',
+                                    WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 15%, black 100%)',
+                                }}
+                            ></div>
+                        </div>
+                    </div>
+
+                    {/* Left Bottom - Badge + Headline */}
+                    <div className="absolute left-52 z-10 w-auto max-w-[480px]" style={{ bottom: '5.5rem' }}>
+                        <div className="flex items-center gap-2 mb-3">
+                            <div className="w-[7px] h-[7px] bg-green-500 rounded-full flex-shrink-0"></div>
+                            <span className="text-[16px]" style={{ color: 'rgb(108, 113, 121)' }}>Available for new projects</span>
+                        </div>
+                        <h1 ref={headlineRef} className="text-3xl xl:text-[40px] font-medium leading-[1.08] tracking-[-0.01em]" style={{ color: 'rgb(17, 17, 17)' }}>
+                            Full-Stack Developer building web apps that don't just look good they run smooth                    </h1>
+                    </div>
+
+                    {/* Right Side - Description + Button */}
+                    <div className="absolute right-[11%] z-10 w-auto max-w-[430px]" style={{ bottom: '20%' }}>
+                        <p ref={descriptionRef} className="text-[16px] leading-[1.4] mb-5 font-light" style={{ color: 'rgb(31, 31, 31)' }}>
+                            I build applications that sit between logic and experience, turning ideas into functional systems. Focused on creating things that not only work but also feel right, with clarity, structure, and real-world usability in mind.                    </p>
+                        <div ref={buttonRef} className="flex flex-row items-center gap-3">
+                            <a
+                                href="#"
+                                onClick={(event) => {
+                                    event.preventDefault();
+                                    openContactModal();
+                                }}
+                                className="text-center text-white px-6 py-3 rounded-2xl text-[15px] font-medium transition-colors duration-300 hover:bg-[#7333F2]"
+                                style={{
+                                    backgroundColor: 'rgb(17, 17, 17)',
+                                    boxShadow: '0.47422285992186514px 0.47422285992186514px 0.6706524000888582px -0.2px rgba(0, 0, 0, 0.05), 1.2914347811369224px 1.2914347811369224px 1.8263645824041657px -0.4px rgba(0, 0, 0, 0.06), 2.8355233674636113px 2.8355233674636113px 4.010035602692868px -0.6px rgba(0, 0, 0, 0.08), 6.294214453822934px 6.294214453822934px 8.901363445081158px -0.8px rgba(0, 0, 0, 0.11), 16px 16px 22.627416997969522px -1px rgba(0, 0, 0, 0.2)',
+                                    textDecoration: 'none'
+                                }}
+                            >
+                                Let's talk
+                            </a>
+                            <a
+                                href={cvLink}
+                                target="_blank"
+                                rel="noreferrer"
+                                className="text-center px-6 py-3 rounded-2xl text-[15px] font-medium transition-colors duration-300"
+                                style={{
+                                    backgroundColor: '#ffffff',
+                                    color: 'rgb(17, 17, 17)',
+                                    border: '1px solid rgba(17, 17, 17, 0.18)',
+                                    textDecoration: 'none'
+                                }}
+                                onMouseEnter={(e) => {
+                                    e.currentTarget.style.backgroundColor = '#7236ED';
+                                    e.currentTarget.style.color = '#ffffff';
+                                }}
+                                onMouseLeave={(e) => {
+                                    e.currentTarget.style.backgroundColor = '#ffffff';
+                                    e.currentTarget.style.color = 'rgb(17, 17, 17)';
+                                }}
+                            >
+                                Get CV
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -388,7 +462,7 @@ const Hero = ({ cvLink = '/cv.pdf' }) => {
                         onClick={(event) => event.stopPropagation()}
                         style={{
                             width: 'min(1040px, 100%)',
-                            borderRadius: '30px',
+                            borderRadius: '20px',
                             overflow: 'hidden',
                             border: '1px solid rgba(255, 255, 255, 0.16)',
                             background: 'radial-gradient(circle at 12% 10%, rgba(115,51,242,0.25) 0%, rgba(11,12,17,0.9) 30%, rgba(10,10,14,0.98) 100%)',

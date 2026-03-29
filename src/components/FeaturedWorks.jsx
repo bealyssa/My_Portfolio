@@ -68,6 +68,8 @@ const FeaturedWorks = () => {
     const panelRef = useRef(null);
     const morePanelRef = useRef(null);
     const closingRef = useRef(false);
+    const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+    const [isTablet, setIsTablet] = useState(window.innerWidth < 1024);
 
     const getCurrentGalleryImages = () => {
         if (!selectedProject) return [];
@@ -532,6 +534,16 @@ const FeaturedWorks = () => {
     };
 
     useEffect(() => {
+        const handleResize = () => {
+            setIsMobile(window.innerWidth < 768);
+            setIsTablet(window.innerWidth < 1024);
+        };
+
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
+    useEffect(() => {
         if (!selectedProject) return;
 
         const previousOverflow = document.body.style.overflow;
@@ -601,7 +613,7 @@ const FeaturedWorks = () => {
     }, []);
 
     return (
-        <section id="work" className="relative z-[80] py-20 px-6 bg-white">
+        <section id="work" className="relative z-[80] py-12 sm:py-16 lg:py-20 px-4 sm:px-6 bg-white">
             {selectedProject && (
                 <div
                     ref={panelRef}
@@ -610,21 +622,21 @@ const FeaturedWorks = () => {
                         top: '0',
                         right: '0',
                         bottom: '0',
-                        width: '100%',
-                        maxWidth: '600px',
+                        width: isMobile ? '100%' : '100%',
+                        maxWidth: isMobile ? 'none' : '600px',
                         backgroundColor: '#ffffff',
                         zIndex: 9999,
                         transform: 'translateX(0)',
                         overflowY: 'auto',
-                        boxShadow: '-10px 0 50px rgba(0, 0, 0, 0.2)'
+                        boxShadow: isMobile ? '-10px 0 30px rgba(0, 0, 0, 0.15)' : '-10px 0 50px rgba(0, 0, 0, 0.2)'
                     }}
                 >
                     <button
                         onClick={closeModal}
                         style={{
                             position: 'absolute',
-                            top: '24px',
-                            right: '24px',
+                            top: '16px',
+                            right: '16px',
                             width: '40px',
                             height: '40px',
                             borderRadius: '50%',
@@ -653,13 +665,13 @@ const FeaturedWorks = () => {
                         </svg>
                     </button>
 
-                    <div style={{ padding: '80px 40px 40px' }}>
+                    <div style={{ padding: isMobile ? '60px 20px 40px' : '80px 40px 40px' }}>
                         <div style={{
                             width: '100%',
-                            height: '300px',
-                            borderRadius: '20px',
+                            height: isMobile ? '220px' : '300px',
+                            borderRadius: '16px',
                             overflow: 'hidden',
-                            marginBottom: '32px'
+                            marginBottom: '24px'
                         }} className="fw-modal-item">
                             <img
                                 src={selectedProject.image}
@@ -680,7 +692,7 @@ const FeaturedWorks = () => {
 
                         <div style={{ marginBottom: '8px' }} className="fw-modal-item">
                             <span style={{
-                                fontSize: '13px',
+                                fontSize: isMobile ? '11px' : '13px',
                                 fontWeight: 500,
                                 color: '#7333F2',
                                 textTransform: 'uppercase',
@@ -691,7 +703,7 @@ const FeaturedWorks = () => {
                         </div>
 
                         <h2 className="fw-modal-item" style={{
-                            fontSize: '36px',
+                            fontSize: isMobile ? '28px' : '36px',
                             fontWeight: 600,
                             color: 'rgb(17, 17, 17)',
                             marginBottom: '8px',
@@ -701,40 +713,40 @@ const FeaturedWorks = () => {
                         </h2>
 
                         <h3 className="fw-modal-item" style={{
-                            fontSize: '18px',
+                            fontSize: isMobile ? '14px' : '18px',
                             fontWeight: 500,
                             color: 'rgb(107, 114, 128)',
-                            marginBottom: '24px'
+                            marginBottom: '20px'
                         }}>
                             {selectedProject.subtitle}
                         </h3>
 
                         <p className="fw-modal-item" style={{
-                            fontSize: '16px',
-                            lineHeight: 1.7,
+                            fontSize: isMobile ? '14px' : '16px',
+                            lineHeight: 1.6,
                             color: 'rgb(31, 31, 31)',
-                            marginBottom: '32px'
+                            marginBottom: '24px'
                         }}>
                             {selectedProject.description}
                         </p>
-                        <div className="fw-modal-item" style={{ marginBottom: '32px' }}>
+                        <div className="fw-modal-item" style={{ marginBottom: '24px' }}>
                             <h4 style={{
-                                fontSize: '14px',
+                                fontSize: '12px',
                                 fontWeight: 600,
                                 textTransform: 'uppercase',
                                 letterSpacing: '0.05em',
                                 color: 'rgb(107, 114, 128)',
-                                marginBottom: '16px'
+                                marginBottom: '12px'
                             }}>
                                 Key Highlights
                             </h4>
                             <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
                                 {selectedProject.highlights && selectedProject.highlights.map((highlight, index) => (
                                     <li key={index} style={{
-                                        fontSize: '15px',
-                                        lineHeight: 1.7,
+                                        fontSize: isMobile ? '13px' : '15px',
+                                        lineHeight: 1.6,
                                         color: 'rgb(31, 31, 31)',
-                                        marginBottom: '12px',
+                                        marginBottom: '10px',
                                         paddingLeft: '24px',
                                         position: 'relative'
                                     }}>
@@ -754,12 +766,12 @@ const FeaturedWorks = () => {
                         </div>
                         <div className="fw-modal-item">
                             <h4 style={{
-                                fontSize: '14px',
+                                fontSize: '12px',
                                 fontWeight: 600,
                                 textTransform: 'uppercase',
                                 letterSpacing: '0.05em',
                                 color: 'rgb(107, 114, 128)',
-                                marginBottom: '16px'
+                                marginBottom: '12px'
                             }}>
                                 Technologies Used
                             </h4>
@@ -768,9 +780,9 @@ const FeaturedWorks = () => {
                                     <span
                                         key={index}
                                         style={{
-                                            padding: '8px 16px',
+                                            padding: isMobile ? '6px 12px' : '8px 16px',
                                             borderRadius: '20px',
-                                            fontSize: '13px',
+                                            fontSize: isMobile ? '11px' : '13px',
                                             fontWeight: 500,
                                             backgroundColor: '#f8f7f6',
                                             color: 'rgb(17, 17, 17)',
@@ -783,17 +795,18 @@ const FeaturedWorks = () => {
                             </div>
                         </div>
 
-                        <div className="fw-modal-item" style={{ marginTop: '28px', display: 'flex', flexWrap: 'wrap', gap: '10px' }}>
+                        <div className="fw-modal-item" style={{ marginTop: '20px', display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
                             <button
                                 type="button"
                                 onClick={toggleMoreGallery}
                                 style={{
-                                    padding: '12px 18px',
+                                    padding: isMobile ? '10px 14px' : '12px 18px',
                                     borderRadius: '999px',
                                     border: '1px solid #111111',
                                     background: showMoreGallery ? '#111111' : '#ffffff',
                                     color: showMoreGallery ? '#ffffff' : '#111111',
                                     fontWeight: 600,
+                                    fontSize: isMobile ? '13px' : '14px',
                                     cursor: 'pointer',
                                     transition: 'all 0.25s ease'
                                 }}
@@ -848,12 +861,13 @@ const FeaturedWorks = () => {
                     ref={morePanelRef}
                     style={{
                         position: 'fixed',
-                        top: '50%',
-                        left: 'calc((100vw - min(100vw, 600px) - min(42vw, 480px)) / 2)',
-                        right: 'auto',
-                        transform: 'translateY(-50%)',
-                        width: 'min(50vw, 640px)',
-                        maxHeight: '78vh',
+                        top: isMobile ? 'auto' : '50%',
+                        left: isMobile ? '20px' : 'calc((100vw - min(100vw, 600px) - min(42vw, 480px)) / 2)',
+                        bottom: isMobile ? '20px' : 'auto',
+                        right: isMobile ? '20px' : 'auto',
+                        transform: isMobile ? 'none' : 'translateY(-50%)',
+                        width: isMobile ? 'calc(100% - 40px)' : 'min(50vw, 640px)',
+                        maxHeight: isMobile ? '60vh' : '78vh',
                         overflowY: 'auto',
                         background: 'transparent',
                         border: 'none',
@@ -872,7 +886,7 @@ const FeaturedWorks = () => {
                     <div
                         style={{
                             display: 'grid',
-                            gridTemplateColumns: 'repeat(2, minmax(0, 1fr))',
+                            gridTemplateColumns: isMobile ? 'repeat(auto-fit, minmax(100px, 1fr))' : 'repeat(2, minmax(0, 1fr))',
                             gap: '12px'
                         }}
                     >
@@ -920,7 +934,7 @@ const FeaturedWorks = () => {
                             right: 0,
                             bottom: 0,
                             width: '100%',
-                            maxWidth: '600px',
+                            maxWidth: isMobile ? 'none' : '600px',
                             backgroundColor: '#f5f5f5',
                             zIndex: 9997
                         }}
@@ -933,7 +947,7 @@ const FeaturedWorks = () => {
                             right: 0,
                             bottom: 0,
                             width: '100%',
-                            maxWidth: '600px',
+                            maxWidth: isMobile ? 'none' : '600px',
                             backgroundColor: '#e0e0e0',
                             zIndex: 9998
                         }}
@@ -958,18 +972,18 @@ const FeaturedWorks = () => {
                 />
             )}
 
-            <div className="max-w-[1400px] mx-auto">
-                <div className="relative mb-12">
-                    <div className="flex justify-between items-center">
+            <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="relative mb-8 sm:mb-12">
+                    <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                         <h2
-                            className="text-5xl font-medium tracking-tight"
+                            className="text-4xl sm:text-5xl font-medium tracking-tight"
                             style={{ color: 'rgb(17, 17, 17)' }}
                         >
                             Featured works
                         </h2>
                         <a
                             href="#"
-                            className="flex items-center gap-2 text-lg font-medium hover:gap-3 transition-all duration-300"
+                            className="flex items-center gap-2 text-base sm:text-lg font-medium hover:gap-3 transition-all duration-300"
                             style={{ color: 'rgb(17, 17, 17)' }}
                         >
                             All Works
@@ -993,7 +1007,7 @@ const FeaturedWorks = () => {
 
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4 sm:gap-6">
                     {projects.map((project, index) => {
                         if (project.isSplit && project.splitItems) {
                             return (
@@ -1009,7 +1023,7 @@ const FeaturedWorks = () => {
                                                 onClick={() => handleProjectClick(splitItem.id)}
                                                 className="block w-full text-left cursor-pointer border-none bg-transparent p-0"
                                             >
-                                                <div className="relative h-[360px] overflow-hidden">
+                                                <div className="relative h-[240px] sm:h-[360px] overflow-hidden">
                                                     <img
                                                         src={splitItem.image}
                                                         alt={splitItem.title}
@@ -1023,44 +1037,46 @@ const FeaturedWorks = () => {
                                                     <div className="absolute inset-0 bg-transparent" />
                                                 </div>
                                             </button>
-                                            <div className="px-5 py-4 bg-white flex items-center justify-between gap-3">
-                                                <h3 className="text-2xl font-bold text-gray-900">{splitItem.title}</h3>
-                                                <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', justifyContent: 'flex-end' }}>
+                                            <div className="px-3 sm:px-5 py-3 sm:py-4 bg-white flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-3">
+                                                <h3 className="text-lg sm:text-2xl font-bold text-gray-900 flex-1">{splitItem.title}</h3>
+                                                <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap', justifyContent: 'flex-start' }}>
                                                     <button
                                                         type="button"
                                                         disabled={!splitItem.sourceCodeUrl}
                                                         onClick={() => openExternalLink(splitItem.sourceCodeUrl)}
                                                         style={{
-                                                            padding: '8px 12px',
+                                                            padding: '6px 10px',
                                                             borderRadius: '999px',
                                                             border: '1px solid #111111',
                                                             background: '#ffffff',
                                                             color: '#111111',
                                                             fontWeight: 600,
-                                                            fontSize: '12px',
+                                                            fontSize: '11px',
                                                             cursor: splitItem.sourceCodeUrl ? 'pointer' : 'not-allowed',
                                                             opacity: splitItem.sourceCodeUrl ? 1 : 0.45,
-                                                            transition: 'all 0.25s ease'
+                                                            transition: 'all 0.25s ease',
+                                                            whiteSpace: 'nowrap'
                                                         }}
                                                         title={splitItem.sourceCodeUrl ? 'Open source code' : 'Add sourceCodeUrl in project data'}
                                                     >
-                                                        Source Code
+                                                        Code
                                                     </button>
                                                     <button
                                                         type="button"
                                                         disabled={!splitItem.livePreviewUrl}
                                                         onClick={() => openExternalLink(splitItem.livePreviewUrl)}
                                                         style={{
-                                                            padding: '8px 12px',
+                                                            padding: '6px 10px',
                                                             borderRadius: '999px',
                                                             border: '1px solid #111111',
                                                             background: '#111111',
                                                             color: '#ffffff',
                                                             fontWeight: 600,
-                                                            fontSize: '12px',
+                                                            fontSize: '11px',
                                                             cursor: splitItem.livePreviewUrl ? 'pointer' : 'not-allowed',
                                                             opacity: splitItem.livePreviewUrl ? 1 : 0.45,
-                                                            transition: 'all 0.25s ease'
+                                                            transition: 'all 0.25s ease',
+                                                            whiteSpace: 'nowrap'
                                                         }}
                                                         title={splitItem.livePreviewUrl ? 'Open live preview' : 'Add livePreviewUrl in project data'}
                                                     >
@@ -1086,7 +1102,7 @@ const FeaturedWorks = () => {
                                     onClick={() => handleProjectClick(project.id)}
                                     className="block w-full text-left cursor-pointer border-none bg-transparent p-0"
                                 >
-                                    <div className="relative h-[360px] overflow-hidden">
+                                    <div className="relative h-[240px] sm:h-[360px] overflow-hidden">
                                         <img
                                             ref={(el) => (imageRefs.current[index] = el)}
                                             src={project.image}

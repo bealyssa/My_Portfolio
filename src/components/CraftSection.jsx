@@ -4,21 +4,21 @@ import MetaBalls from './MetaBalls';
 const CraftSection = () => {
     return (
         <section
-            className="w-full mb-24"
+            className="w-full mb-16 sm:mb-20 lg:mb-24"
             style={{
                 borderTop: '1.5px solid #b7b7bc'
             }}
         >
-            <div className="w-full pt-20 md:pt-36  pb-8 md:pb-12">
-                <div className="w-full px-12 md:px-56">
+            <div className="w-full pt-12 sm:pt-20 lg:pt-36 pb-6 sm:pb-8 lg:pb-12">
+                <div className="w-full px-4 sm:px-8 lg:px-56">
                     <div className="max-w-[645px]">
-                        <p className="text-4xl md:text-[28px] font-medium tracking-tight"
+                        <p className="text-2xl sm:text-3xl lg:text-4xl lg:md:text-[28px] font-medium tracking-tight"
                             style={{ color: '#1f1f1f' }}>
 Precision-led design, rigorously engineered systems, and meticulous execution combine to create calm, high-performing digital experiences that feel effortless.                        </p>
                     </div>
                 </div>
 
-                <div className="relative mt-12 md:mt-16 h-[420px] md:h-[520px] w-full max-w-[1200px] mx-auto">
+                <div className="relative mt-8 sm:mt-12 lg:mt-16 h-[300px] sm:h-[420px] lg:h-[520px] w-full max-w-[1200px] mx-auto">
                     <MetaBalls
                         color="#111111"
                         cursorBallColor="#f2f2f2"
@@ -33,7 +33,7 @@ Precision-led design, rigorously engineered systems, and meticulous execution co
                     />
 
                     <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
-                        <p className="text-[28px] md:text-[44px] font-medium text-[#000000] tracking-tight">
+                        <p className="text-xl sm:text-2xl lg:text-[44px] lg:md:text-[28px] font-medium text-[#000000] tracking-tight px-4">
                             Code, Design, Motion
                         </p>
                     </div>

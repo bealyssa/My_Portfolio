@@ -61,29 +61,29 @@ const Philosophy = () => {
             id="philosophy-section"
             className="relative bg-white"
             style={{
-                paddingTop: '500px',
-                paddingBottom: '500px',
+                paddingTop: 'clamp(200px, 50vh, 500px)',
+                paddingBottom: 'clamp(200px, 50vh, 500px)',
                 minHeight: '100vh',
             }}
         >
-            <div className="max-w-[900px] mx-auto px-6 lg:px-12">
-                <div ref={textContainerRef} className="space-y-8">
+            <div className="max-w-[900px] mx-auto px-4 sm:px-6 lg:px-12">
+                <div ref={textContainerRef} className="space-y-6 sm:space-y-8">
                     <p
-                        className="philosophy-line text-4xl lg:text-5xl font-light leading-[1.2] tracking-tight"
+                        className="philosophy-line text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-light leading-[1.2] tracking-tight"
                         style={{ color: 'rgb(17, 17, 17)' }}
                     >
                         Great interfaces are invisible.
                     </p>
 
                     <p
-                        className="philosophy-line text-4xl lg:text-5xl font-light leading-[1.2] tracking-tight"
+                        className="philosophy-line text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-light leading-[1.2] tracking-tight"
                         style={{ color: 'rgb(17, 17, 17)' }}
                     >
                         They guide, they breathe, they work everywhere without asking permission.
                     </p>
 
                     <p
-                        className="philosophy-line text-4xl lg:text-5xl font-light leading-[1.2] tracking-tight"
+                        className="philosophy-line text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-light leading-[1.2] tracking-tight"
                         style={{ color: 'rgb(17, 17, 17)' }}
                     >
                         I don't chase trends—I master fundamentals.
